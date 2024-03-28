@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лампочка</title>
+    <style>
+        .lamp {
+            width: 100px;
+            height: 100px;
+            background-color: white;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            transition: background-color 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="lamp" id="lamp"></div>
+    <button onclick="toggleLight(true)">Включити лампочку</button>
+    <button onclick="toggleLight(false)">Вимкнути лампочку</button>
+
+    <script>
+        function toggleLight(on) {
+            var lamp = document.getElementById("lamp");
+            if (on) {
+                lamp.style.backgroundColor = "yellow";
+            } else {
+                lamp.style.backgroundColor = "white";
+            }
+        }
+    </script>
+</body>
+</html>
