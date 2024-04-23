@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Color Change on Click</title>
+<style>
+    .container {
+        cursor: pointer;
+        padding: 10px;
+        margin: 5px;
+        border: 1px solid black;
+    }
+</style>
+</head>
+<body>
+
+<h2 id="propertyAccess" class="container" onclick="changeColor('propertyAccess')">Доступ до властивостей і методів</h2>
+
+<p id="allCollection" class="container" onclick="changeColor('allCollection')">Колекція all</p>
+
+<div id="getElementById" class="container" onclick="changeColor('getElementById')">Метод getElementById()</div>
+
+<script>
+    function changeColor(id) {
+        var element = document.getElementById(id);
+        if (element.style.color === 'black') {
+            element.style.color = 'white';
+            element.style.backgroundColor = 'blue';
+        } else {
+            element.style.color = 'black';
+            element.style.backgroundColor = 'yellow';
+        }
+    }
+</script>
+
+</body>
+</html>
