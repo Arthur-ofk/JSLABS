@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>П'ять подій з мишкою</title>
+    <style>
+        .clickable {
+            cursor: pointer;
+        }
+        .container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        img {
+            width: 300px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>П'ять подій з мишкою</h1>
+    <p id="clickText" class="clickable">Клацніть на мене мишкою</p>
+    <p id="holdText" class="clickable">На цьому тексті натисніть, потримайте і відпустіть ліву кнопку мишки</p>
+    <p id="hoverText" class="clickable">Повільно проведіть курсором мишки по цій написи</p>
+
+    <div class="container" id="imageContainer">
+        <img id="image" src="https://via.placeholder.com/300" alt="Placeholder Image">
+        <p id="imageCaption" class="clickable">Це підпис під зображенням</p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const clickText = document.getElementById('clickText');
+            const holdText = document.getElementById('holdText');
+            const hoverText = document.getElementById('hoverText');
+            
+            const imageContainer = document.getElementById('imageContainer');
+            const image = document.getElementById('image');
+            const imageCaption = document.getElementById('imageCaption');
+
+            let clickTextToggled = false;
+            let imageToggled = false;
+
+            // Обробник події для натискання на текст
+            clickText.addEventListener('click', function () {
+                if (!clickTextToggled) {
+                    clickText.style.fontSize = '48pt';
+                    clickText.style.color = 'white';
+                    clickText.style.backgroundColor = 'lightblue';
+                } else {
+                    clickText.style.fontSize = '';
+                    clickText.style.color = '';
+                    clickText.style.backgroundColor = '';
+                }
+                clickTextToggled = !clickTextToggled;
+            });
+
+            // Обробник події для натискання і відпускання на текст
+            holdText.addEventListener('mousedown', function () {
+                holdText.style.backgroundColor = 'green';
+                window.event.cancelBubble = true;
+            });
+
+            holdText.addEventListener('mouseup', function () {
+                holdText.style.backgroundColor = 'yellow';
+                window.event.cancelBubble = true;
+            });
+
+            // Обробник події для наведення курсору мишки на текст
+            hoverText.addEventListener('mouseover', function () {
+                hoverText.style.backgroundColor = 'red';
+                window.event.cancelBubble = true;
+            });
+
+            hoverText.addEventListener('mouseout', function () {
+                hoverText.style.backgroundColor = 'lightblue';
+                window.event.cancelBubble = true;
+            });
+
+            // Обробник подій для зображення і підпису
+            imageContainer.addEventListener('click', function (event) {
+                if (event.target === imageCaption) {
+                    // Зміна кольору підпису при натисканні
+                    imageCaption.style.color = imageCaption.style.color === 'red' ? '' : 'red';
+                    window.event.cancelBubble = true;
+                } else if (event.target === image) {
+                    // Заміна зображення і підпису при натисканні
+                    if (!imageToggled) {
+                        image.src = 'https://via.placeholder.com/300/0000FF';
+                        imageCaption.textContent = 'Нове зображення і новий підпис';
+                    } else {
+                        image.src = 'https://via.placeholder.com/300';
+                        imageCaption.textContent = 'Це підпис під зображенням';
+                    }
+                    imageToggled = !imageToggled;
+                    window.event.cancelBubble = true;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
