@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Облік надходження товарів</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 50%;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+
+        input[type="number"] {
+            width: 60px;
+        }
+
+        #totalPrice {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Облік надходження товарів</h1>
+    <table id="productTable">
+        <tr>
+            <th>Назва товару</th>
+            <th>Кількість</th>
+            <th>Ціна за одиницю</th>
+            <th>Загальна вартість</th>
+        </tr>
+        <tr>
+            <td>Товар 1</td>
+            <td><input type="number" id="quantity1" value="1" min="1"></td>
+            <td><input type="number" id="price1" value="10" min="0"></td>
+            <td id="total1">10</td>
+        </tr>
+        <tr>
+            <td>Товар 2</td>
+            <td><input type="number" id="quantity2" value="1" min="1"></td>
+            <td><input type="number" id="price2" value="15" min="0"></td>
+            <td id="total2">15</td>
+        </tr>
+    </table>
+
+    <div>
+        <label for="totalPrice">Загальна вартість:</label>
+        <span id="totalPrice">25</span>
+    </div>
+
+    <script>
+        const quantityInputs = document.querySelectorAll('input[type="number"]');
+        const totalPrices = document.querySelectorAll('#productTable td[id^="total"]');
+        const totalPriceSpan = document.getElementById('totalPrice');
+
+        function updateTotals() {
+            let totalPrice = 0;
+            totalPrices.forEach((total, index) => {
+                const quantity = Number(quantityInputs[index].value);
+                const price = Number(total.parentElement.querySelector('input[type="number"]').value);
+                const totalValue = quantity * price;
+                total.textContent = totalValue;
+                totalPrice += totalValue;
+            });
+            totalPriceSpan.textContent = totalPrice;
+        }
+
+        quantityInputs.forEach(input => {
+            input.addEventListener('input', updateTotals);
+        });
+
+        window.addEventListener('load', updateTotals);
+    </script>
+</body>
+</html>

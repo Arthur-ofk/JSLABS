@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вихідні дані для таблиці тригонометричних функцій</title>
+</head>
+<body>
+    <h1>Введіть вихідні дані для таблиці тригонометричних функцій</h1>
+    <form id="inputForm">
+        <label for="startX">Початкове значення X:</label>
+        <input type="number" id="startX" name="startX" step="0.01" required><br><br>
+
+        <label for="endX">Кінцеве значення X:</label>
+        <input type="number" id="endX" name="endX" step="0.01" required><br><br>
+
+        <label for="step">Крок:</label>
+        <input type="number" id="step" name="step" step="0.01" required><br><br>
+
+        <label for="func">Тригонометрична функція:</label>
+        <select id="func" name="func" required>
+            <option value="sin">sin(x)</option>
+            <option value="cos">cos(x)</option>
+            <option value="tan">tan(x)</option>
+        </select><br><br>
+
+        <input type="submit" value="Побудувати таблицю">
+    </form>
+
+    <script>
+        document.getElementById('inputForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const startX = document.getElementById('startX').value;
+            const endX = document.getElementById('endX').value;
+            const step = document.getElementById('step').value;
+            const func = document.getElementById('func').value;
+            const url = `second_page.html?startX=${startX}&endX=${endX}&step=${step}&func=${func}`;
+            window.open(url, '_blank');
+        });
+    </script>
+</body>
+</html>

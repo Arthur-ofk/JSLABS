@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Таблиця значень тригонометричних функцій</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Таблиця значень тригонометричних функцій</h1>
+    <table id="resultTable">
+        <thead>
+            <tr>
+                <th>x</th>
+                <th>y</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+       
+        const urlParams = new URLSearchParams(window.location.search);
+        const startX = parseFloat(urlParams.get('startX'));
+        const endX = parseFloat(urlParams.get('endX'));
+        const step = parseFloat(urlParams.get('step'));
+        const func = urlParams.get('func');
+
+        
+        const tableBody = document.getElementById('resultTable').getElementsByTagName('tbody')[0];
+        for (let x = startX; x <= endX; x += step) {
+            let y;
+            switch (func) {
+                case 'sin':
+                    y = Math.sin(x);
+                    break;
+                case 'cos':
+                    y = Math.cos(x);
+                    break;
+                case 'tan':
+                    y = Math.tan(x);
+                    break;
+                default:
+                    y = NaN;
+                    break;
+            }
+            const newRow = tableBody.insertRow();
+            const cellX = newRow.insertCell(0);
+            const cellY = newRow.insertCell(1);
+            cellX.textContent = x.toFixed(2);
+            cellY.textContent = y.toFixed(2);
+        }
+    </script>
+</body>
+</html>
