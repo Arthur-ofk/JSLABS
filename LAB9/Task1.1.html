@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Замовлення меблів</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        select, input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+        }
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Замовлення меблів</h1>
+    <form id="orderForm" method="POST" action="order.php">
+        <label for="product">Виберіть виріб:</label>
+        <select id="product" name="product" required>
+            <option value="">-- Оберіть виріб --</option>
+            <option value="шафа">Шафа</option>
+            <option value="стіл">Стіл</option>
+            <option value="сервант">Сервант</option>
+            <option value="стелаж">Стелаж</option>
+        </select>
+
+        <label for="material">Виберіть матеріал:</label>
+        <select id="material" name="material" required>
+            <option value="">-- Оберіть матеріал --</option>
+            <option value="дуб">Дуб</option>
+            <option value="горіх">Горіх</option>
+            <option value="бук">Бук</option>
+        </select>
+
+        <label for="quantity">Кількість виробів:</label>
+        <input type="number" id="quantity" name="quantity" min="1" required>
+
+        <button type="submit">Замовити</button>
+        <div id="error" class="error"></div>
+    </form>
+
+    <script>
+        document.getElementById('orderForm').addEventListener('submit', function(event) {
+            const product = document.getElementById('product').value;
+            const material = document.getElementById('material').value;
+            const quantity = document.getElementById('quantity').value;
+
+            if (!product || !material || !quantity) {
+                event.preventDefault();
+                document.getElementById('error').textContent = 'Будь ласка, заповніть всі поля.';
+            }
+        });
+    </script>
+</body>
+</html>

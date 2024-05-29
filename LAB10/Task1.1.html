@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Перегляд фотографій</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        select {
+            margin-bottom: 20px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        function updateImage() {
+            const imageSelect = document.getElementById("imageSelect");
+            const selectedImage = imageSelect.value;
+            const imageElement = document.getElementById("displayedImage");
+
+            switch (selectedImage) {
+                case 'nature':
+                    imageElement.src = 'https://source.unsplash.com/800x600/?nature';
+                    break;
+                case 'city':
+                    imageElement.src = 'https://source.unsplash.com/800x600/?city';
+                    break;
+                case 'animals':
+                    imageElement.src = 'https://source.unsplash.com/800x600/?animals';
+                    break;
+                case 'technology':
+                    imageElement.src = 'https://source.unsplash.com/800x600/?technology';
+                    break;
+                default:
+                    imageElement.src = '';
+                    break;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Перегляд фотографій</h1>
+    <label for="imageSelect">Виберіть категорію зображень:</label>
+    <select id="imageSelect" onchange="updateImage()">
+        <option value="">--Виберіть категорію--</option>
+        <option value="nature">Природа</option>
+        <option value="city">Міста</option>
+        <option value="animals">Тварини</option>
+        <option value="technology">Технології</option>
+    </select>
+    <img id="displayedImage" src="" alt="Вибране зображення">
+</body>
+</html>
